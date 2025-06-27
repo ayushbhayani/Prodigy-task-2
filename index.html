@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Number Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 50px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+      margin-top: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #007acc;
+      color: white;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    #feedback {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎯 Guess the Number (1–100)</h2>
+
+  <input type="number" id="guess" placeholder="Enter your guess" min="1" max="100">
+  <br>
+  <button onclick="checkGuess()">Submit Guess</button>
+
+  <p id="feedback"></p>
+
+  <script>
+    const numberToGuess = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const userGuess = parseInt(document.getElementById("guess").value);
+      const feedback = document.getElementById("feedback");
+
+      if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+        feedback.innerText = "Please enter a number between 1 and 100.";
+        return;
+      }
+
+      attempts++;
+
+      if (userGuess < numberToGuess) {
+        feedback.innerText = "Too low! Try again.";
+      } else if (userGuess > numberToGuess) {
+        feedback.innerText = "Too high! Try again.";
+      } else {
+        feedback.innerText = `🎉 Correct! You guessed the number in ${attempts} attempt(s).`;
+      }
+    }
+  </script>
+
+</body>
+</html>
